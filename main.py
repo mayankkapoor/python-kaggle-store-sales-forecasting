@@ -154,6 +154,9 @@ def main():
     train_data = merged_df.loc[merged_df['date'] < split_date]
     validation_data = merged_df.loc[merged_df['date'] >= split_date]
 
+    train_data = train_data.set_index('date').sort_index()
+    validation_data = validation_data.set_index('date').sort_index()
+
     # Find the best SARIMAX parameters using grid search
     best_order, best_seasonal_order = find_best_sarimax_parameters(train_data)
 
